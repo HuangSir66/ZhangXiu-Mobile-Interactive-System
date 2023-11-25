@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 
 
 public interface UserService extends IService<User> {
+    public User getUserWithAssetById(Long userId);
 }

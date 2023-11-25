@@ -1,6 +1,7 @@
 package com.example.culture_service.domain;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -15,4 +16,7 @@ public class User {
     private String username;
 
     private String password;
+
+    @TableField(exist = false)
+    private UserAsset userAsset;
 }
