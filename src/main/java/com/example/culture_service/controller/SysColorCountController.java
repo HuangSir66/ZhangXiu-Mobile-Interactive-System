@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-public class GetSysColorCountController {
+public class SysColorCountController {
     @Autowired
     private SysColorCountServiceImpl sysColorCountService;
     /*
@@ -25,7 +25,7 @@ public class GetSysColorCountController {
     public JsonResult<List<SysColorCount>> getColorCount(@PathVariable Long userid){
         try{
             List<SysColorCount> sysColorCounts = sysColorCountService.getColorCountByUserId(userid);
-            if(sysColorCounts!=null){
+            if(sysColorCounts!=null && !sysColorCounts.isEmpty()){
                 return new JsonResult<>("200", "获取成功", sysColorCounts);
             }else{
                 return new JsonResult<>("404", "未找到颜料");

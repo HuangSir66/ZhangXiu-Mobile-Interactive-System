@@ -38,7 +38,14 @@ public class ColorTest {
         sysFacialMakeupMapper.selectList(null);
     }
 
+    @Autowired
+    private SysAccessoryMapper sysAccessoryMapper;
 
+    @Test
+    public void getALl(){
+        sysAccessoryMapper.selectList(null);
+
+    }
 
 
 }

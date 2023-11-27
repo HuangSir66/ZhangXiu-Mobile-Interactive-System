@@ -14,7 +14,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-public class GetUserSilkWormNumberController {
+public class UserSilkWormNumberController {
     @Autowired
     private UserSilkwormNumberServiceImpl userSilkwormNumberService;
     /*
@@ -24,7 +24,7 @@ public class GetUserSilkWormNumberController {
     public JsonResult<List<UserSilkwormNumber>> getSilkworm(@PathVariable Long userid){
         try{
             List<UserSilkwormNumber> userSilkwormNumber = userSilkwormNumberService.getSilkwormNumberByUserId(userid);
-            if(userSilkwormNumber!=null){
+            if(userSilkwormNumber!=null && !userSilkwormNumber.isEmpty()){
                 return new JsonResult<>("200", "获取成功", userSilkwormNumber);
             }else{
                 return new JsonResult<>("404", "未找到蚕丝数");

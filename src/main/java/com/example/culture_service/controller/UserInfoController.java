@@ -1,11 +1,7 @@
 package com.example.culture_service.controller;
 
-import com.example.culture_service.domain.SysColorCount;
 import com.example.culture_service.domain.User;
-import com.example.culture_service.domain.UserSilkwormNumber;
-import com.example.culture_service.service.impl.SysColorCountServiceImpl;
 import com.example.culture_service.service.impl.UserServiceImpl;
-import com.example.culture_service.service.impl.UserSilkwormNumberServiceImpl;
 import com.example.culture_service.utils.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/user")
-public class GetUserInfoController {
+public class UserInfoController {
 
     @Autowired
     private UserServiceImpl userService;
-
-
-
-
     /*
     获取用户所有信息
      */
