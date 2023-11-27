@@ -3,7 +3,9 @@ package com.example.culture_service;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.example.culture_service.domain.User;
+import com.example.culture_service.domain.UserSilkwormNumber;
 import com.example.culture_service.mapper.UserMapper;
+import com.example.culture_service.mapper.UserSilkwormNumberMapper;
 import com.example.culture_service.service.UserService;
 import com.example.culture_service.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
 import java.util.Map;
 @SpringBootTest
 public class MybatisPlusServiceTest {
@@ -40,15 +43,43 @@ public class MybatisPlusServiceTest {
     private UserMapper userMapper;
     @Test
     public void getUserInfo(){
-        User user_info = userMapper.selectUserWithAssetById(1728378987765317634L);
+        User user_info = userMapper.selectUserWithAssetById(1728630967578398722L);
         System.out.println(user_info);
 
 
 
 
+    }
+    @Autowired
+    private UserSilkwormNumberMapper userSilkwormNumberMapper;
 
-
+    @Test
+    public void gerSilkWormInfo(){
+        UserSilkwormNumber userSilkwormNumber = new UserSilkwormNumber();
+        userSilkwormNumber.setUserId(1728064772806651906L);
+        userSilkwormNumberMapper.insert(userSilkwormNumber);
 
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

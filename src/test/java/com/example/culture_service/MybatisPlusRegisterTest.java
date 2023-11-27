@@ -1,10 +1,14 @@
 package com.example.culture_service;
 
+import com.example.culture_service.domain.SysColorCount;
 import com.example.culture_service.domain.UserAsset;
+import com.example.culture_service.mapper.SysColorCountMapper;
 import com.example.culture_service.mapper.UserAssetMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 public class MybatisPlusRegisterTest {
@@ -17,6 +21,16 @@ public class MybatisPlusRegisterTest {
         UserAsset userAsset = new UserAsset();
         userAsset.setUserId(1727986098187034626L);
         userAssetMapper.insert(userAsset);
+    }
+
+    @Autowired
+    private SysColorCountMapper sysColorCountMapper;
+
+    @Test
+    public void ColorCount(){
+
+        List<SysColorCount> List2 = sysColorCountMapper.selectList(null);
+
     }
 
 }

@@ -11,7 +11,7 @@ public class SysColorCount {
 
     private Long userId;
 
-    private Long colorId;
+    private String color;
 
     private Integer count;
 

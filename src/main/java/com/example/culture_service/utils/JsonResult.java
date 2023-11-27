@@ -2,9 +2,10 @@ package com.example.culture_service.utils;
 
 public class JsonResult<T> {
 
-    private T data;
+
     private String code;
     private String msg;
+    private T data;
 
     /**
      * 若没有数据返回，默认状态码为 0，提示信息为“操作成功！”

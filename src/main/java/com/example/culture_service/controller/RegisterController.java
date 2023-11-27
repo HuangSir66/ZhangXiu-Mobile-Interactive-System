@@ -2,10 +2,14 @@ package com.example.culture_service.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.example.culture_service.domain.SysColor;
 import com.example.culture_service.domain.User;
 import com.example.culture_service.domain.UserAsset;
+import com.example.culture_service.domain.UserSilkwormNumber;
+import com.example.culture_service.mapper.SysColorMapper;
 import com.example.culture_service.mapper.UserAssetMapper;
 import com.example.culture_service.mapper.UserMapper;
+import com.example.culture_service.mapper.UserSilkwormNumberMapper;
 import com.example.culture_service.service.UserService;
 import com.example.culture_service.utils.JsonResult;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -33,6 +35,11 @@ public class RegisterController {
     @Autowired
     private UserAssetMapper userAssetMapper;
 
+    @Autowired
+    private UserSilkwormNumberMapper userSilkwormNumberMapper;
+
+    @Autowired
+    private SysColorMapper sysColorMapper;
 
     @PostMapping("/register")
     public JsonResult<User> register(@RequestBody User requestUser) {
@@ -62,6 +69,23 @@ public class RegisterController {
             userAsset.setUserId(user_info.getId());
             userAssetMapper.insert(userAsset);
 
+            List<SysColor> ColorList = sysColorMapper.selectList(null);
+            List<String> SizeList = Arrays.asList("大只", "中只", "小只");
+            List<String> StatuList = Arrays.asList("幼蚕","青年蚕","老蚕");
+            for(SysColor sysColor: ColorList){
+                for(String size:SizeList){
+                    for(String statu:StatuList){
+                        String color = sysColor.getColor();
+                        UserSilkwormNumber userSilkwormNumber = new UserSilkwormNumber();
+                        userSilkwormNumber.setUserId(user_info.getId());
+                        userSilkwormNumber.setSilkwormColor(color);
+                        userSilkwormNumber.setSilkwormSize(size);
+                        userSilkwormNumber.setSilkwormStatu(statu);
+                        userSilkwormNumberMapper.insert(userSilkwormNumber);
+                    }
+                }
+            }
+
             jsonResult = new JsonResult<>("200", "注册成功");
             return jsonResult;
         }
@@ -77,5 +101,4 @@ public class RegisterController {
         }
         return sb.toString();
     }
-
 }

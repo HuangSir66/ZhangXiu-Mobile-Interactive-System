@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper extends BaseMapper<User> {
     User selectUserWithAssetById(@Param("userId") Long userId);
+
+
 }

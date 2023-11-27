@@ -1,26 +1,47 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- user_mapper.xml -->
 <mapper namespace="com.example.culture_service.mapper.UserMapper">
+
     <resultMap id="userResultMap" type="com.example.culture_service.domain.User">
+        <!-- 定义User表字段到User实体类属性的映射 -->
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
 
+        <!-- 定义UserAsset关联属性的映射 -->
         <association property="userAsset" javaType="com.example.culture_service.domain.UserAsset">
-            <id property="id" column="id"/>
-            <result property="userId" column="user_id"/>
+            <id property="id" column="ua_id"/>
+            <result property="userId" column="ua_user_id"/>
             <result property="coinNumber" column="coin_number"/>
             <result property="silkwormLeaves" column="silkworm_leaves"/>
             <result property="pupaeNumber" column="pupae_number"/>
             <result property="fabricNumber" column="fabric_number"/>
         </association>
+
+        <!-- 定义UserSilkwormNumber关联属性的映射 -->
+        <collection  property="silkwormNumber" ofType="com.example.culture_service.domain.UserSilkwormNumber">
+            <id property="id" column="usn_id"/>
+            <result property="userId" column="usn_user_id"/>
+            <result property="silkwormNumber" column="silkworm_number"/>
+            <result property="silkwormColor" column="silkworm_color"/>
+            <result property="silkwormStatu" column="silkworm_statu"/>
+            <result property="silkwormSize" column="silkworm_size"/>
+        </collection >
     </resultMap>
+
+    <!-- 定义selectUserWithAssetAndSilkwormById的SQL查询 -->
     <select id="selectUserWithAssetById" resultMap="userResultMap">
-        SELECT u.*, ua.*
+        SELECT
+            u.id, u.name, u.username, u.password,
+            ua.id AS ua_id, ua.user_id AS ua_user_id, ua.coin_number, ua.silkworm_leaves, ua.pupae_number, ua.fabric_number,
+            usn.id AS usn_id, usn.user_id AS usn_user_id, usn.silkworm_number, usn.silkworm_color, usn.silkworm_statu, usn.silkworm_size
         FROM user_info u
                  LEFT JOIN user_asset ua ON u.id = ua.user_id
+                 LEFT JOIN user_silkworm_number usn ON u.id = usn.user_id
         WHERE u.id = #{userId}
     </select>
 </mapper>
+

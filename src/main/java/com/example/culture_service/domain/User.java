@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @TableName("user_info")
 public class User {
@@ -19,4 +21,9 @@ public class User {
 
     @TableField(exist = false)
     private UserAsset userAsset;
+
+    @TableField(exist = false)
+    private List<UserSilkwormNumber> silkwormNumber;
+
+
 }
