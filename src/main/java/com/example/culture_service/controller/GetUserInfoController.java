@@ -24,11 +24,9 @@ public class GetUserInfoController {
     @Autowired
     private UserServiceImpl userService;
 
-    @Autowired
-    private UserSilkwormNumberServiceImpl userSilkwormNumberService;
 
-    @Autowired
-    private SysColorCountServiceImpl sysColorCountService;
+
+
     /*
     获取用户所有信息
      */
@@ -47,39 +45,9 @@ public class GetUserInfoController {
     }
 
 
-    /*
-    获取用户蚕只种类数量
-     */
-    @GetMapping("/silkworm_number/{userid}")
-    public JsonResult<List<UserSilkwormNumber>> getSilkworm(@PathVariable Long userid){
-        try{
-            List<UserSilkwormNumber> userSilkwormNumber = userSilkwormNumberService.getSilkwormNumberByUserId(userid);
-            if(userSilkwormNumber!=null){
-                return new JsonResult<>("200", "获取成功", userSilkwormNumber);
-            }else{
-                return new JsonResult<>("404", "未找到蚕丝数");
-            }
-        }catch (Exception e) {
-            return new JsonResult<>("500", "获取失败");
-        }
-    }
 
-    /*
-    获取用户颜料数量
-     */
-    @GetMapping("/color_count/{userid}")
-    public JsonResult<List<SysColorCount>> getColorCount(@PathVariable Long userid){
-        try{
-            List<SysColorCount> sysColorCounts = sysColorCountService.getColorCountByUserId(userid);
-            if(sysColorCounts!=null){
-                return new JsonResult<>("200", "获取成功", sysColorCounts);
-            }else{
-                return new JsonResult<>("404", "未找到颜料");
-            }
-        }catch (Exception e) {
-            return new JsonResult<>("500", "获取失败");
-        }
-    }
+
+
 
 
 }

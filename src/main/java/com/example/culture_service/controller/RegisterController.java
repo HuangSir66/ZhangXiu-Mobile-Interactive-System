@@ -2,14 +2,8 @@ package com.example.culture_service.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.example.culture_service.domain.SysColor;
-import com.example.culture_service.domain.User;
-import com.example.culture_service.domain.UserAsset;
-import com.example.culture_service.domain.UserSilkwormNumber;
-import com.example.culture_service.mapper.SysColorMapper;
-import com.example.culture_service.mapper.UserAssetMapper;
-import com.example.culture_service.mapper.UserMapper;
-import com.example.culture_service.mapper.UserSilkwormNumberMapper;
+import com.example.culture_service.domain.*;
+import com.example.culture_service.mapper.*;
 import com.example.culture_service.service.UserService;
 import com.example.culture_service.utils.JsonResult;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +34,10 @@ public class RegisterController {
 
     @Autowired
     private SysColorMapper sysColorMapper;
+
+    @Autowired
+    private SysColorCountMapper sysColorCountMapper;
+
 
     @PostMapping("/register")
     public JsonResult<User> register(@RequestBody User requestUser) {
@@ -85,6 +83,14 @@ public class RegisterController {
                     }
                 }
             }
+            for(SysColor sysColor:ColorList){
+                String color = sysColor.getColor();
+                SysColorCount sysColorCount = new SysColorCount();
+                sysColorCount.setColor(color);
+                sysColorCount.setUserId(user_info.getId());
+                sysColorCountMapper.insert(sysColorCount);
+            }
+
 
             jsonResult = new JsonResult<>("200", "注册成功");
             return jsonResult;
