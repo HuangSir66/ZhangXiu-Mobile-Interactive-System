@@ -43,6 +43,7 @@ public class RegisterController {
     public JsonResult<User> register(@RequestBody User requestUser) {
         String username = requestUser.getUsername();
         String password = requestUser.getPassword();
+        String name = requestUser.getName();
 
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(User::getUsername, username).like(User::getPassword, password);
@@ -54,11 +55,11 @@ public class RegisterController {
 
         if (user != null) {
             System.out.println("账号已存在");
-            jsonResult = new JsonResult<>("200", "账号已存在");
+            jsonResult = new JsonResult<>("404", "账号已存在");
             return jsonResult;
         } else {
             User user_info = new User();
-            user_info.setName(generateRandomChineseString(5));
+            user_info.setName(name);
             user_info.setPassword(password);
             user_info.setUsername(username);
             userMapper.insert(user_info);

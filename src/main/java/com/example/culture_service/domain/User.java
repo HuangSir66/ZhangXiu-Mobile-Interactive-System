@@ -22,8 +22,8 @@ public class User {
     @TableField(exist = false)
     private UserAsset userAsset;
 
-    @TableField(exist = false)
-    private List<UserSilkwormNumber> silkwormNumber;
+//    @TableField(exist = false)
+//    private List<UserSilkwormNumber> silkwormNumber;
 
 
 }

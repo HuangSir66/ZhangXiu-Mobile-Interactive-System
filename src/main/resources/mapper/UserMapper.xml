@@ -21,15 +21,15 @@
             <result property="fabricNumber" column="fabric_number"/>
         </association>
 
-        <!-- 定义UserSilkwormNumber关联属性的映射 -->
-        <collection  property="silkwormNumber" ofType="com.example.culture_service.domain.UserSilkwormNumber">
-            <id property="id" column="usn_id"/>
-            <result property="userId" column="usn_user_id"/>
-            <result property="silkwormNumber" column="silkworm_number"/>
-            <result property="silkwormColor" column="silkworm_color"/>
-            <result property="silkwormStatu" column="silkworm_statu"/>
-            <result property="silkwormSize" column="silkworm_size"/>
-        </collection >
+
+<!--        <collection  property="silkwormNumber" ofType="com.example.culture_service.domain.UserSilkwormNumber">-->
+<!--            <id property="id" column="usn_id"/>-->
+<!--            <result property="userId" column="usn_user_id"/>-->
+<!--            <result property="silkwormNumber" column="silkworm_number"/>-->
+<!--            <result property="silkwormColor" column="silkworm_color"/>-->
+<!--            <result property="silkwormStatu" column="silkworm_statu"/>-->
+<!--            <result property="silkwormSize" column="silkworm_size"/>-->
+<!--        </collection >-->
     </resultMap>
 
     <!-- 定义selectUserWithAssetAndSilkwormById的SQL查询 -->

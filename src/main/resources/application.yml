@@ -15,3 +15,7 @@ mybatis-plus:
 server:
   servlet:
     context-path: /api
+
+
+  port: 8080
+  address: 0.0.0.0
