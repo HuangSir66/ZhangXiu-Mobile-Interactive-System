@@ -19,6 +19,9 @@ public class SysEmbroideryMethodController {
     @Autowired
     private SysEmbroideryMethodMapper sysEmbroideryMethodMapper;
 
+    /*
+    获取针绣方法
+     */
     @GetMapping("/embroiderymethod")
     public JsonResult<List<SysEmbroideryMethod>> GetSysEmbroideryMethod(){
         try{

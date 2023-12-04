@@ -14,7 +14,5 @@ public class UserAsset {
 
     private Integer silkwormLeaves;
 
-    private Integer pupaeNumber;
-
     private Integer fabricNumber;
 }

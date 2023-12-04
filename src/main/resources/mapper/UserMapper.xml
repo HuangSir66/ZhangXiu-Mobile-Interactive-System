@@ -9,7 +9,6 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="username" column="username"/>
-        <result property="password" column="password"/>
 
         <!-- 定义UserAsset关联属性的映射 -->
         <association property="userAsset" javaType="com.example.culture_service.domain.UserAsset">
@@ -17,30 +16,36 @@
             <result property="userId" column="ua_user_id"/>
             <result property="coinNumber" column="coin_number"/>
             <result property="silkwormLeaves" column="silkworm_leaves"/>
-            <result property="pupaeNumber" column="pupae_number"/>
             <result property="fabricNumber" column="fabric_number"/>
         </association>
 
 
-<!--        <collection  property="silkwormNumber" ofType="com.example.culture_service.domain.UserSilkwormNumber">-->
-<!--            <id property="id" column="usn_id"/>-->
-<!--            <result property="userId" column="usn_user_id"/>-->
-<!--            <result property="silkwormNumber" column="silkworm_number"/>-->
-<!--            <result property="silkwormColor" column="silkworm_color"/>-->
-<!--            <result property="silkwormStatu" column="silkworm_statu"/>-->
-<!--            <result property="silkwormSize" column="silkworm_size"/>-->
-<!--        </collection >-->
+        <collection  property="silkwormNumber" ofType="com.example.culture_service.domain.UserSilkwormNumber">
+            <id property="id" column="usn_id"/>
+            <result property="userId" column="usn_user_id"/>
+            <result property="silkwormNumber" column="silkworm_number"/>
+            <result property="silkwormStatu" column="silkworm_statu"/>
+        </collection >
+
+        <collection property="sysColorCounts" ofType="com.example.culture_service.domain.SysColorCount">
+            <id property="id" column="scc_id"/>
+            <result property="userId" column="scc_user_id"/>
+            <result property="color" column="color"/>
+            <result property="count" column="count"/>
+        </collection>
     </resultMap>
 
     <!-- 定义selectUserWithAssetAndSilkwormById的SQL查询 -->
     <select id="selectUserWithAssetById" resultMap="userResultMap">
         SELECT
             u.id, u.name, u.username, u.password,
-            ua.id AS ua_id, ua.user_id AS ua_user_id, ua.coin_number, ua.silkworm_leaves, ua.pupae_number, ua.fabric_number,
-            usn.id AS usn_id, usn.user_id AS usn_user_id, usn.silkworm_number, usn.silkworm_color, usn.silkworm_statu, usn.silkworm_size
+            ua.id AS ua_id, ua.user_id AS ua_user_id, ua.coin_number, ua.silkworm_leaves, ua.fabric_number,
+            usn.id AS usn_id, usn.user_id AS usn_user_id, usn.silkworm_number,  usn.silkworm_statu,
+            scc.id As scc_id, scc.user_id AS scc_user_id, scc.color,scc.count
         FROM user_info u
                  LEFT JOIN user_asset ua ON u.id = ua.user_id
                  LEFT JOIN user_silkworm_number usn ON u.id = usn.user_id
+                 LEFT JOIN sys_color_count scc ON u.id = scc.user_id
         WHERE u.id = #{userId}
     </select>
 </mapper>

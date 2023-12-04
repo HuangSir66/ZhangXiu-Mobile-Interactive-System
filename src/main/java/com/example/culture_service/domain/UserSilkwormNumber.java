@@ -13,10 +13,6 @@ public class UserSilkwormNumber {
 
     private Integer silkwormNumber;
 
-    private String silkwormColor;
-
     private String silkwormStatu;
-
-    private String silkwormSize;
 
 }

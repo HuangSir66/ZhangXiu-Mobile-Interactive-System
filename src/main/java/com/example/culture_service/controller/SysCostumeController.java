@@ -23,9 +23,9 @@ public class SysCostumeController {
     private SysCostumeMapper sysCostumeMapper;
 
 
-    /*
+    /**
     获取用户服饰
-     */
+     **/
     @GetMapping("/costume")
     public JsonResult<List<SysCostume>> GetSysCostume(){
         try{
