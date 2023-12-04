@@ -37,6 +37,8 @@ public class RegisterController {
     @Autowired
     private SysColorCountMapper sysColorCountMapper;
 
+    @Autowired
+    private UserSilkwormStatuMapper userSilkwormStatuMapper;
 
     @PostMapping("/register/")
     public JsonResult<User> register(@RequestBody User requestUser) {
@@ -73,11 +75,11 @@ public class RegisterController {
             /*
               先写死，后面从数据库读取
              */
-            List<String> StatuList = Arrays.asList("幼蚕","青年蚕","老蚕");
-            for(String statu:StatuList){
+            List<UserSilkwormStatu> StatuList = userSilkwormStatuMapper.selectList(null);
+            for(UserSilkwormStatu statu:StatuList){
                 UserSilkwormNumber userSilkwormNumber = new UserSilkwormNumber();
                 userSilkwormNumber.setUserId(user_info.getId());
-                userSilkwormNumber.setSilkwormStatu(statu);
+                userSilkwormNumber.setSilkwormStatu(statu.getStatu());
                 userSilkwormNumberMapper.insert(userSilkwormNumber);
             }
             for(SysColor sysColor:ColorList){

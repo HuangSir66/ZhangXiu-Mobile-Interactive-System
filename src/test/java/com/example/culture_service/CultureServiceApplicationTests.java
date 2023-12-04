@@ -1,10 +1,14 @@
 package com.example.culture_service;
 
 import com.example.culture_service.domain.SysColorCount;
+import com.example.culture_service.domain.UserSilkwormStatu;
 import com.example.culture_service.mapper.SysColorCountMapper;
+import com.example.culture_service.mapper.UserSilkwormStatuMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 class CultureServiceApplicationTests {
@@ -16,11 +20,14 @@ class CultureServiceApplicationTests {
 
 
     @Autowired
-    private SysColorCountMapper sysColorCountMapper;
+    private UserSilkwormStatuMapper sysColorCountMapper;
 
     @Test
     public void getColor(){
-        sysColorCountMapper.selectList(null);
+        List<UserSilkwormStatu> list=  sysColorCountMapper.selectList(null);
+        for(UserSilkwormStatu silkwormStatu:list){
+            System.out.println(silkwormStatu.getStatu());
+        }
 
     }
 
