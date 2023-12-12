@@ -22,17 +22,19 @@ public class UserInfoController {
     @Autowired
     private UserAssetService userAssetService;
 
-
     @Autowired
     private UserAssetMapper userAssetMapper;
 
-
-    /*
-    获取用户所有信息
+    /**
+     * 获取用户及其资产信息
+     *
+     * @param userId 用户ID
+     * @return JsonResult 包含用户及其资产信息的 JSON 对象
      */
     @GetMapping("/userinfo/{userId}")
     public JsonResult<User> getUserWithAssetById(@PathVariable Long userId) {
         try {
+            // 查询用户及其资产信息
             User userWithAsset = userService.getUserWithAssetById(userId);
             if (userWithAsset != null) {
                 return new JsonResult<>("200", "查询成功", userWithAsset);
@@ -40,36 +42,40 @@ public class UserInfoController {
                 return new JsonResult<>("404", "用户不存在");
             }
         } catch (Exception e) {
+            // 处理异常，返回查询失败的信息
             return new JsonResult<>("500", "查询失败");
         }
     }
 
-
-
-    /*
-    添加金币
+    /**
+     * 添加用户金币
+     *
+     * @param userId    用户ID
+     * @param userAsset 包含金币数量的 UserAsset 对象
+     * @return JsonResult 包含操作结果的 JSON 对象
      */
-
     @PutMapping("/userinfo/addcoins/{userId}/")
     public JsonResult<String> addCoinNumber(@PathVariable Long userId, @RequestBody UserAsset userAsset) {
-
         Integer coin = userAsset.getCoinNumber();
         try {
+            // 调用服务层方法增加用户金币
             userAssetService.addCoinNumber(userId, coin);
             return new JsonResult<>("200", "金币增加成功", null);
         } catch (Exception e) {
+            // 处理异常，返回金币增加失败的信息
             return new JsonResult<>("500", "金币增加失败", null);
         }
     }
 
-
-    /*
-    扣除用户金币
-
+    /**
+     * 扣除用户金币
+     *
+     * @param userId    用户ID
+     * @param userAsset 包含金币数量的 UserAsset 对象
+     * @return JsonResult 包含操作结果的 JSON 对象
      */
     @PutMapping("/userinfo/subcoins/{userId}/")
     public JsonResult<String> subCoinNumber(@PathVariable Long userId, @RequestBody UserAsset userAsset) {
-
         Integer coin = userAsset.getCoinNumber();
         // 查询用户资产
         QueryWrapper<UserAsset> queryWrapper = new QueryWrapper<>();

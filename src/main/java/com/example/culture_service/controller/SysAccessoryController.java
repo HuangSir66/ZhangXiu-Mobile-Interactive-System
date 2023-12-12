@@ -2,12 +2,10 @@ package com.example.culture_service.controller;
 
 import com.example.culture_service.domain.SysAccessory;
 import com.example.culture_service.mapper.SysAccessoryMapper;
-import com.example.culture_service.service.SysAccessoryService;
 import com.example.culture_service.utils.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,24 +15,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/sys")
 public class SysAccessoryController {
+
     @Autowired
     private SysAccessoryMapper sysAccessoryMapper;
-    /*
-        获取用户配饰数量
-    */
+
+    /**
+     * 获取所有系统配饰数量
+     *
+     * @return JsonResult 包含系统配饰信息的 JSON 对象
+     */
     @GetMapping("/accessory")
-    public JsonResult<List<SysAccessory>> GetSysAccessory(){
-        try{
+    public JsonResult<List<SysAccessory>> GetSysAccessory() {
+        try {
+            // 查询所有系统配饰信息
             List<SysAccessory> sysAccessory = sysAccessoryMapper.selectList(null);
-            System.out.println(sysAccessory);
-            if(sysAccessory!=null && !sysAccessory.isEmpty()){
+
+            if (sysAccessory != null && !sysAccessory.isEmpty()) {
                 return new JsonResult<>("200", "获取成功", sysAccessory);
-            }else{
+            } else {
                 return new JsonResult<>("404", "未找到配饰");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
+            // 处理异常，返回获取失败的信息
             return new JsonResult<>("500", "获取失败");
         }
     }
-
 }

@@ -1,6 +1,5 @@
 package com.example.culture_service.controller;
 
-import com.example.culture_service.domain.SysCostume;
 import com.example.culture_service.domain.SysEmbroideryMethod;
 import com.example.culture_service.mapper.SysEmbroideryMethodMapper;
 import com.example.culture_service.utils.JsonResult;
@@ -16,24 +15,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/sys")
 public class SysEmbroideryMethodController {
+
     @Autowired
     private SysEmbroideryMethodMapper sysEmbroideryMethodMapper;
 
-    /*
-    获取针绣方法
+    /**
+     * 获取所有针绣方法信息
+     *
+     * @return JsonResult 包含针绣方法信息的 JSON 对象
      */
     @GetMapping("/embroiderymethod")
-    public JsonResult<List<SysEmbroideryMethod>> GetSysEmbroideryMethod(){
-        try{
+    public JsonResult<List<SysEmbroideryMethod>> getSysEmbroideryMethod() {
+        try {
+            // 查询所有针绣方法信息
             List<SysEmbroideryMethod> sysEmbroideryMethod = sysEmbroideryMethodMapper.selectList(null);
-            if(sysEmbroideryMethod!=null && !sysEmbroideryMethod.isEmpty()){
+
+            if (sysEmbroideryMethod != null && !sysEmbroideryMethod.isEmpty()) {
                 return new JsonResult<>("200", "获取成功", sysEmbroideryMethod);
-            }else{
-                return new JsonResult<>("404", "未找到针秀");
+            } else {
+                return new JsonResult<>("404", "未找到针绣方法");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
+            // 处理异常，返回获取失败的信息
             return new JsonResult<>("500", "获取失败");
         }
     }
-
 }

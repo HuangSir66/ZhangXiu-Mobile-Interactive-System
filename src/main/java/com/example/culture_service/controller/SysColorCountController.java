@@ -16,21 +16,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class SysColorCountController {
+
     @Autowired
     private SysColorCountServiceImpl sysColorCountService;
-    /*
-        获取用户颜料数量
-         */
+
+    /**
+     * 获取用户颜料数量
+     *
+     * @param userid 用户ID
+     * @return JsonResult 包含用户颜料数量信息的 JSON 对象
+     */
     @GetMapping("/color_count/{userid}")
-    public JsonResult<List<SysColorCount>> getColorCount(@PathVariable Long userid){
-        try{
+    public JsonResult<List<SysColorCount>> getColorCount(@PathVariable Long userid) {
+        try {
+            // 查询用户颜料数量信息
             List<SysColorCount> sysColorCounts = sysColorCountService.getColorCountByUserId(userid);
-            if(sysColorCounts!=null && !sysColorCounts.isEmpty()){
+
+            if (sysColorCounts != null && !sysColorCounts.isEmpty()) {
                 return new JsonResult<>("200", "获取成功", sysColorCounts);
-            }else{
+            } else {
                 return new JsonResult<>("404", "未找到颜料");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
+            // 处理异常，返回获取失败的信息
             return new JsonResult<>("500", "获取失败");
         }
     }

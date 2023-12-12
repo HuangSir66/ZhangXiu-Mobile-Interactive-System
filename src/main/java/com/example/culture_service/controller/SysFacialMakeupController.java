@@ -1,6 +1,5 @@
 package com.example.culture_service.controller;
 
-import com.example.culture_service.domain.SysEmbroideryMethod;
 import com.example.culture_service.domain.SysFacialMakeup;
 import com.example.culture_service.mapper.SysFacialMakeupMapper;
 import com.example.culture_service.utils.JsonResult;
@@ -16,19 +15,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/sys")
 public class SysFacialMakeupController {
+
     @Autowired
     private SysFacialMakeupMapper sysFacialMakeupMapper;
 
+    /**
+     * 获取所有脸谱化妆信息
+     *
+     * @return JsonResult 包含脸谱化妆信息的 JSON 对象
+     */
     @GetMapping("/sysfacialmakeup")
-    public JsonResult<List<SysFacialMakeup>> GetSysEmbroideryMethod(){
-        try{
+    public JsonResult<List<SysFacialMakeup>> getSysFacialMakeup() {
+        try {
+            // 查询所有脸谱化妆信息
             List<SysFacialMakeup> sysFacialMakeup = sysFacialMakeupMapper.selectList(null);
-            if(sysFacialMakeup!=null && !sysFacialMakeup.isEmpty()){
+
+            if (sysFacialMakeup != null && !sysFacialMakeup.isEmpty()) {
                 return new JsonResult<>("200", "获取成功", sysFacialMakeup);
-            }else{
-                return new JsonResult<>("404", "未找到针秀");
+            } else {
+                return new JsonResult<>("404", "未找到脸谱化妆信息");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
+            // 处理异常，返回获取失败的信息
             return new JsonResult<>("500", "获取失败");
         }
     }

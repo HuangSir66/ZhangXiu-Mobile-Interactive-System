@@ -10,17 +10,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserSilkWormNumberController {
+
     @Autowired
     private UserSilkwormNumberServiceImpl userSilkwormNumberService;
 
     @Autowired
     private UserSilkwormNumberMapper userSilkwormNumberMapper;
-    /*
-    获取用户蚕只种类数量
+
+    /**
+     * 获取用户蚕丝数量
+     *
+     * @param userid 用户ID
+     * @return JsonResult 包含用户蚕丝数量信息的 JSON 对象
      */
     @GetMapping("/silkworm_number/{userid}")
     public JsonResult<List<UserSilkwormNumber>> getSilkworm(@PathVariable Long userid) {
@@ -42,10 +48,12 @@ public class UserSilkWormNumberController {
         }
     }
 
-    /*
-    熟蚕长大
+    /**
+     * 熟蚕长大
+     *
+     * @param userid 用户ID
+     * @return JsonResult 包含修改结果的 JSON 对象
      */
-
     @GetMapping("/silkworm_number/ripe_silkworm_grow/{userid}")
     public JsonResult<List<UserSilkwormNumber>> addRipeSilkworm(@PathVariable Long userid) {
         try {
@@ -78,8 +86,11 @@ public class UserSilkWormNumberController {
         }
     }
 
-    /*
-        蚁蚕长大
+    /**
+     * 蚁蚕长大
+     *
+     * @param userid 用户ID
+     * @return JsonResult 包含修改结果的 JSON 对象
      */
     @GetMapping("/silkworm_number/ant_silkworm_grow/{userid}")
     public JsonResult<List<UserSilkwormNumber>> addAntSilkworm(@PathVariable Long userid) {
@@ -113,8 +124,11 @@ public class UserSilkWormNumberController {
         }
     }
 
-    /*
-    收货蚕茧
+    /**
+     * 收货蚕茧
+     *
+     * @param userid 用户ID
+     * @return JsonResult 包含修改结果的 JSON 对象
      */
     @GetMapping("/silkworm_number/get_silkworm_cocoon/{userid}")
     public JsonResult<List<UserSilkwormNumber>> getSilkwormCocoon(@PathVariable Long userid) {
@@ -152,6 +166,4 @@ public class UserSilkWormNumberController {
             return new JsonResult<>("400","修改失败");
         }
     }
-
-
 }
